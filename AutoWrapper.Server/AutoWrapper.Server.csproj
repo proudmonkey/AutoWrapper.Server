@@ -1,8 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0-rc</Version>
+    <Authors>Vincent Maverick Durano</Authors>
+    <Company />
+    <Description>AutoWrapper response unwrapper message handler for server-side use.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/proudmonkey/AutoWrapper.Server</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/proudmonkey/AutoWrapper.Server</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>REST, API, WebAPI, ASP.NETCore, DelegatingHandler, AutoWrapper, UnWrapper</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
