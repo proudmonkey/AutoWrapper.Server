@@ -2,21 +2,30 @@
 using AutoWrapper.Server.Wrapper;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using NS = Newtonsoft.Json;
+using DN = System.Text.Json;
 
 namespace AutoWrapper.Server
 {
-    public class UnWrapResponseHandler: DelegatingHandler
+    public class UnwrapResponseHandler: DelegatingHandler
     {
+        private readonly string _propertyToUnwrap = string.Empty;
+        public UnwrapResponseHandler(string propertyToUnwrap)
+        {
+            _propertyToUnwrap = propertyToUnwrap;
+        }
+
+        public UnwrapResponseHandler(){}
+
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var response = await base.SendAsync(request, cancellationToken);
-            return await UnWrapResponse(request, response);
+            return await UnWrapResponse(_propertyToUnwrap, response);
         }
 
-        private static async Task<HttpResponseMessage> UnWrapResponse(HttpRequestMessage request, HttpResponseMessage response)
+        private static async Task<HttpResponseMessage> UnWrapResponse(string propertyToUnwrap, HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
             {
@@ -24,11 +33,25 @@ namespace AutoWrapper.Server
             }
 
             var contentResult = await response.Content.ReadAsStringAsync();
-            var data = JsonSerializer.Deserialize<ApiResponse>(contentResult, JsonSettings.JsonDeserializerSettings());
+
+            AutoWrapperResponse data = new AutoWrapperResponse() ;
+            string content = string.Empty;
+            if (string.IsNullOrEmpty(propertyToUnwrap))
+            {
+                data = DN.JsonSerializer.Deserialize<AutoWrapperResponse>(contentResult, JsonSettings.DotNetJsonSettings());
+                content = DN.JsonSerializer.Serialize(data.Result);
+            }
+
+            else
+            {
+                data = NS.JsonConvert.DeserializeObject<AutoWrapperResponse>(contentResult, JsonSettings.NewtonsoftJsonSettings(propertyToUnwrap));
+                content = NS.JsonConvert.SerializeObject(data.Result);
+            }
+       
 
             var unwrappedResponse = new HttpResponseMessage(response.StatusCode)
             {
-                Content = new StringContent(JsonSerializer.Serialize(data.Result), Encoding.UTF8, "application/json")
+                Content = new StringContent(content, Encoding.UTF8, "application/json")
             };
 
             foreach (var header in response.Headers)
