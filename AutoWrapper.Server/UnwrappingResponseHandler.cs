@@ -9,15 +9,15 @@ using DN = System.Text.Json;
 
 namespace AutoWrapper.Server
 {
-    public class UnwrapResponseHandler: DelegatingHandler
+    public class UnwrappingResponseHandler : DelegatingHandler
     {
         private readonly string _propertyToUnwrap = string.Empty;
-        public UnwrapResponseHandler(string propertyToUnwrap)
+        public UnwrappingResponseHandler(string propertyToUnwrap)
         {
             _propertyToUnwrap = propertyToUnwrap;
         }
 
-        public UnwrapResponseHandler(){}
+        public UnwrappingResponseHandler(){}
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
@@ -34,7 +34,7 @@ namespace AutoWrapper.Server
 
             var contentResult = await response.Content.ReadAsStringAsync();
 
-            AutoWrapperResponse data = new AutoWrapperResponse() ;
+            AutoWrapperResponse data = new AutoWrapperResponse();
             string content = string.Empty;
             if (string.IsNullOrEmpty(propertyToUnwrap))
             {
