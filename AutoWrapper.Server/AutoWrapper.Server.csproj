@@ -2,17 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0-rc</Version>
+    <Version>1.0.0</Version>
     <Authors>Vincent Maverick Durano</Authors>
     <Company />
-    <Description>AutoWrapper response unwrapper message handler for server-side use.</Description>
+    <Description>AutoWrapper.Server is a Message Handler that unwraps the Result property of the AutoWrapper ApiResponse object.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/proudmonkey/AutoWrapper.Server</PackageProjectUrl>
     <RepositoryUrl>https://github.com/proudmonkey/AutoWrapper.Server</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>REST, API, WebAPI, ASP.NETCore, DelegatingHandler, AutoWrapper, UnWrapper</PackageTags>
+    <PackageTags>AspNetCore, AutoWrapper.Server, AutoWrapper.Core, DelegatingHandler, AutoWrapper, UnWrapper</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>-v1 official release</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
