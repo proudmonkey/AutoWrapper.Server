@@ -16,6 +16,19 @@ namespace AutoWrapper.Server.Helpers
             };
         }
 
+        public static JsonSerializerSettings NewtonsoftJsonSettings<T>(string newJsonProperty)
+        {
+            var jsonResolver = new CustomResultAttributeResolver();
+            jsonResolver.RenameProperty(typeof(T), DefaultResultProperty, newJsonProperty);
+
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = jsonResolver
+            };
+
+            return settings;
+        }
+
         public static JsonSerializerSettings NewtonsoftJsonSettings(string newJsonProperty)
         {
             var jsonResolver = new CustomResultAttributeResolver();
