@@ -40,7 +40,7 @@ public async Task<IEnumerable<PersonDTO>> Get()
 
 If you are using the `[AutoWrapperPropertyMap]` to replace the default `Result` property to something else like `Payload`, then you can use the following overload method below and pass the matching property:
 
-```
+```csharp
 Unwrapper.Unwrap<IEnumerable<PersonDTO>>(jsonString, "payload");
 ```
 
@@ -64,3 +64,10 @@ public async Task<IEnumerable<PersonDTO>> Get()
     return persons;
 }
 ```
+
+You can also pass the matching property to the handler like in the following:
+
+```
+var client = HttpClientFactory.Create(new UnwrappingResponseHandler("payload"));
+```
+That's it. If you used [AutoWrapper](https://github.com/proudmonkey/AutoWrapper) or if you find this useful, please give it a star to show your support and share it to others. :)
