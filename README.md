@@ -4,6 +4,8 @@
 
 `AutoWrapper.Server` is a simple library that enables you unwrap the `Result` property of the [AutoWrapper](https://github.com/proudmonkey/AutoWrapper)'s `ApiResponse` object in your C# server-side code. The goal is to deserialize the `Result` object directly to your matching `Model` without having you to create the `ApiResponse` schema.
 
+For details about `AutoWrapper`, check the official repo here: [AutoWrapper](https://github.com/proudmonkey/AutoWrapper)
+
 # Installation
 1. Download and Install the latest `AutoWrapper.Server` from NuGet or via CLI:
 
