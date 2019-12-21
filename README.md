@@ -72,4 +72,7 @@ You can also pass the matching property to the handler like in the following:
 ```csharp
 var client = HttpClientFactory.Create(new UnwrappingResponseHandler("payload"));
 ```
+
+## Give a Star! :star:
+
 That's it. If you used [AutoWrapper](https://github.com/proudmonkey/AutoWrapper) or if you find this useful, please give it a star to show your support and share it to others. :)
