@@ -1,4 +1,4 @@
-<img align="right" src="/AutoWrapper.Server/logo.png" />
+<img align="right" src="/AutoWrapper.Server/newlogo.png" />
 
 # AutoWrapper.Server  [![Nuget](https://img.shields.io/nuget/v/AutoWrapper.Server?color=blue)](https://www.nuget.org/packages/AutoWrapper.Server) [![Nuget downloads](https://img.shields.io/nuget/dt/AutoWrapper.Server?color=green)](https://www.nuget.org/packages/AutoWrapper.Server)
 
