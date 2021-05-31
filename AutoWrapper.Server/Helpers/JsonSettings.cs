@@ -2,12 +2,12 @@
 using Newtonsoft.Json;
 using System.Text.Json;
 
-
 namespace AutoWrapper.Server.Helpers
 {
     public class JsonSettings
     {
         private const string DefaultResultProperty = "Result";
+
         public static JsonSerializerOptions DotNetJsonSettings(bool ignoreCase = true)
         {
             return new JsonSerializerOptions
@@ -27,6 +27,25 @@ namespace AutoWrapper.Server.Helpers
             };
 
             return settings;
+        }
+
+        public static JsonSerializerSettings NewtonsoftJsonSettings<T>(string newJsonProperty, JsonSerializerSettings jsonSettings = null)
+        {
+            var jsonResolver = new CustomResultAttributeResolver();
+            jsonResolver.RenameProperty(typeof(T), DefaultResultProperty, newJsonProperty);
+
+            if (jsonSettings != null)
+            {
+                jsonSettings.ContractResolver = jsonResolver;
+                return jsonSettings;
+            }
+            else
+            {
+                return new JsonSerializerSettings
+                {
+                    ContractResolver = jsonResolver
+                };
+            }
         }
 
         public static JsonSerializerSettings NewtonsoftJsonSettings(string newJsonProperty)
