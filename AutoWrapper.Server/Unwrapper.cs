@@ -1,6 +1,6 @@
 ﻿using AutoWrapper.Server.Helpers;
-using NS = Newtonsoft.Json;
 using DN = System.Text.Json;
+using NS = Newtonsoft.Json;
 
 namespace AutoWrapper.Server
 {
@@ -8,6 +8,7 @@ namespace AutoWrapper.Server
     {
         public T Result { get; set; }
     }
+
     public class Unwrapper
     {
         public static T Unwrap<T>(string jsonString, string propertyToUnwrap = "", bool ignoreCase = true)
@@ -25,5 +26,27 @@ namespace AutoWrapper.Server
             }
         }
 
+        /// <summary>
+        /// Unwrap Api Response
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonString">json string to deserialize</param>
+        /// <param name="propertyToUnwrap"></param>
+        /// <param name="settings">Newtonsoft SerializerSettings</param>
+        /// <returns>return the deserialize value</returns>
+        public static T Unwrap<T>(string jsonString, string propertyToUnwrap = "", NS.JsonSerializerSettings settings = null)
+        {
+            WrapTo<T> data;
+            if (string.IsNullOrEmpty(propertyToUnwrap))
+            {
+                data = NS.JsonConvert.DeserializeObject<WrapTo<T>>(jsonString, settings);
+                return data.Result;
+            }
+            else
+            {
+                data = NS.JsonConvert.DeserializeObject<WrapTo<T>>(jsonString, JsonSettings.NewtonsoftJsonSettings<WrapTo<T>>(propertyToUnwrap, settings));
+                return data.Result;
+            }
+        }
     }
 }
